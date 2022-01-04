@@ -22,7 +22,7 @@ namespace InterfazIT
         }
         protected void UploadButton_Click(object sender, EventArgs e)
         {
-            // Especificar la ruta del servidor donde se guardaran los archivos.
+            //Especificar la ruta del servidor donde se guardaran los archivos.
             //cambiar ruta 
             String savePath = @"C:\tempera\";
 
@@ -49,7 +49,7 @@ namespace InterfazIT
                 String savePathFirma = savePath + fileFirma;
 
                 // Llamamos al metodo SaveAs para guardar el archivo subido el ruta especificada.
-                // Los archivos con el mismo nombre se sobrescribiran.
+                // Los archivos con el mismo nombre se sobreescribiran.
                 FileUpload1.SaveAs(savePathPDF);
                 FileUpload2.SaveAs(savePathFirma);
                 //FileUpload3.SaveAs(savePathImg);
@@ -67,7 +67,7 @@ namespace InterfazIT
                     var fechaCaducidad = Convert.ToDateTime(certificate.GetExpirationDateString());
                     //fecha de firmado
                     var fechaActual = Convert.ToDateTime(DateTime.Now);
-                    //resto 
+                    //Dias de vigencia de la firma
                     var rest = fechaCaducidad - fechaActual;
                     var restDays = rest.ToString("dd");
 
@@ -91,6 +91,7 @@ namespace InterfazIT
                     barCode.Save(@"C:\tempera\BarCodeImage.png", System.Drawing.Imaging.ImageFormat.Png);
                     String savePathImg = savePath + "BarCodeImage.png";
 
+                    //Firmado del documento
                     //imagen de la firma...*obligatorio
                     byte[] imageData = File.ReadAllBytes(savePathImg);
                     //posicion de la firma respecto al numero de pagina del documento...*obligatorio
@@ -126,8 +127,7 @@ namespace InterfazIT
                     Response.ContentType = "application/pdf";
 
                     Response.BinaryWrite(data);
-                    Response.End();
-                    
+                    Response.End();                    
                 }
                 else
                 {
